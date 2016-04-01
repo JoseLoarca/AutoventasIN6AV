@@ -1,0 +1,106 @@
+﻿@model Autoventas_IN6AV.Models.Automovil
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Automovil</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.archivo.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.archivo.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.categoria.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.categoria.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.combustible.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.combustible.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.estado.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.estado.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.marca.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.marca.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.transmision.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.transmision.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.modelo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.modelo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.año)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.año)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.color)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.color)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.precio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.precio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.informacionExtra)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.informacionExtra)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idAutomovil }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

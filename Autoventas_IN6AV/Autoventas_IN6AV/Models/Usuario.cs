@@ -29,7 +29,6 @@ namespace Autoventas_IN6AV.Models
         public String confirmPassword { get; set; }
 
         public virtual Rol rol { get; set; }
-
-        public List<Reservacion> reservaciones { get; set; }
+        public virtual Reservacion reservacion { get; set; }
     }
 }

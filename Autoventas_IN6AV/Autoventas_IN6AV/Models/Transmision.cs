@@ -6,11 +6,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Autoventas_IN6AV.Models
 {
-    public class Estado
+    public class Transmision
     {
         [Key]
-        public int idEstado { get; set; }
-        [Display(Name = "Estado"), Required(ErrorMessage = "Este dato es obligatorio.")]
+        public int idTransmision { get; set; }
+        [Display(Name="Transmisión"), Required(ErrorMessage="Este dato es obligatorio.")]
         public String nombre { get; set; }
 
         public virtual List<Automovil> automoviles { get; set; }

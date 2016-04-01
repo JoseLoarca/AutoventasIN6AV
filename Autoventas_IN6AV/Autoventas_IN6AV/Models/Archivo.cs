@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Autoventas_IN6AV.Models
 {
@@ -15,6 +16,6 @@ namespace Autoventas_IN6AV.Models
         public FileType tipo { get; set; }
         public Byte[] contenido { get; set; }
 
-        public virtual Automovil automovil { get; set; }
+        public virtual List<Automovil> automoviles { get; set; }
     }
 }

@@ -16,11 +16,8 @@ namespace Autoventas_IN6AV.Migrations
                         ContentType = c.String(),
                         tipo = c.Int(nullable: false),
                         contenido = c.Binary(),
-                        automovil_idAutomovil = c.Int(),
                     })
-                .PrimaryKey(t => t.idArchivo)
-                .ForeignKey("dbo.Automovils", t => t.automovil_idAutomovil)
-                .Index(t => t.automovil_idAutomovil);
+                .PrimaryKey(t => t.idArchivo);
             
             CreateTable(
                 "dbo.Automovils",
@@ -32,8 +29,29 @@ namespace Autoventas_IN6AV.Migrations
                         color = c.String(nullable: false),
                         precio = c.String(nullable: false),
                         informacionExtra = c.String(nullable: false),
+                        idArchivo = c.Int(),
+                        idMarca = c.Int(nullable: false),
+                        idCategoria = c.Int(nullable: false),
+                        idCombustible = c.Int(nullable: false),
+                        idEstado = c.Int(nullable: false),
+                        idTransmision = c.Int(nullable: false),
+                        reservacion_idReservacion = c.Int(),
                     })
-                .PrimaryKey(t => t.idAutomovil);
+                .PrimaryKey(t => t.idAutomovil)
+                .ForeignKey("dbo.Archivoes", t => t.idArchivo)
+                .ForeignKey("dbo.Categorias", t => t.idCategoria, cascadeDelete: true)
+                .ForeignKey("dbo.Combustibles", t => t.idCombustible, cascadeDelete: true)
+                .ForeignKey("dbo.Estadoes", t => t.idEstado, cascadeDelete: true)
+                .ForeignKey("dbo.Marcas", t => t.idMarca, cascadeDelete: true)
+                .ForeignKey("dbo.Reservacions", t => t.reservacion_idReservacion)
+                .ForeignKey("dbo.Transmisions", t => t.idTransmision, cascadeDelete: true)
+                .Index(t => t.idArchivo)
+                .Index(t => t.idMarca)
+                .Index(t => t.idCategoria)
+                .Index(t => t.idCombustible)
+                .Index(t => t.idEstado)
+                .Index(t => t.idTransmision)
+                .Index(t => t.reservacion_idReservacion);
             
             CreateTable(
                 "dbo.Categorias",
@@ -41,11 +59,8 @@ namespace Autoventas_IN6AV.Migrations
                     {
                         idCategoria = c.Int(nullable: false, identity: true),
                         nombre = c.String(nullable: false),
-                        automovil_idAutomovil = c.Int(),
                     })
-                .PrimaryKey(t => t.idCategoria)
-                .ForeignKey("dbo.Automovils", t => t.automovil_idAutomovil)
-                .Index(t => t.automovil_idAutomovil);
+                .PrimaryKey(t => t.idCategoria);
             
             CreateTable(
                 "dbo.Combustibles",
@@ -53,11 +68,8 @@ namespace Autoventas_IN6AV.Migrations
                     {
                         idCombustible = c.Int(nullable: false, identity: true),
                         nombre = c.String(nullable: false),
-                        automovil_idAutomovil = c.Int(),
                     })
-                .PrimaryKey(t => t.idCombustible)
-                .ForeignKey("dbo.Automovils", t => t.automovil_idAutomovil)
-                .Index(t => t.automovil_idAutomovil);
+                .PrimaryKey(t => t.idCombustible);
             
             CreateTable(
                 "dbo.Estadoes",
@@ -65,11 +77,8 @@ namespace Autoventas_IN6AV.Migrations
                     {
                         idEstado = c.Int(nullable: false, identity: true),
                         nombre = c.String(nullable: false),
-                        automovil_idAutomovil = c.Int(),
                     })
-                .PrimaryKey(t => t.idEstado)
-                .ForeignKey("dbo.Automovils", t => t.automovil_idAutomovil)
-                .Index(t => t.automovil_idAutomovil);
+                .PrimaryKey(t => t.idEstado);
             
             CreateTable(
                 "dbo.Marcas",
@@ -77,11 +86,8 @@ namespace Autoventas_IN6AV.Migrations
                     {
                         idMarca = c.Int(nullable: false, identity: true),
                         nombre = c.String(nullable: false),
-                        automovil_idAutomovil = c.Int(),
                     })
-                .PrimaryKey(t => t.idMarca)
-                .ForeignKey("dbo.Automovils", t => t.automovil_idAutomovil)
-                .Index(t => t.automovil_idAutomovil);
+                .PrimaryKey(t => t.idMarca);
             
             CreateTable(
                 "dbo.Reservacions",
@@ -89,14 +95,8 @@ namespace Autoventas_IN6AV.Migrations
                     {
                         idReservacion = c.Int(nullable: false, identity: true),
                         fecha = c.DateTime(nullable: false),
-                        automovil_idAutomovil = c.Int(),
-                        usuario_idUsuario = c.Int(),
                     })
-                .PrimaryKey(t => t.idReservacion)
-                .ForeignKey("dbo.Automovils", t => t.automovil_idAutomovil)
-                .ForeignKey("dbo.Usuarios", t => t.usuario_idUsuario)
-                .Index(t => t.automovil_idAutomovil)
-                .Index(t => t.usuario_idUsuario);
+                .PrimaryKey(t => t.idReservacion);
             
             CreateTable(
                 "dbo.Usuarios",
@@ -110,10 +110,13 @@ namespace Autoventas_IN6AV.Migrations
                         username = c.String(nullable: false),
                         password = c.String(nullable: false),
                         confirmPassword = c.String(nullable: false),
+                        reservacion_idReservacion = c.Int(),
                         rol_idRol = c.Int(),
                     })
                 .PrimaryKey(t => t.idUsuario)
+                .ForeignKey("dbo.Reservacions", t => t.reservacion_idReservacion)
                 .ForeignKey("dbo.Rols", t => t.rol_idRol)
+                .Index(t => t.reservacion_idReservacion)
                 .Index(t => t.rol_idRol);
             
             CreateTable(
@@ -132,14 +135,14 @@ namespace Autoventas_IN6AV.Migrations
                     {
                         idVenta = c.Int(nullable: false, identity: true),
                         fecha = c.DateTime(nullable: false),
-                        formaPago_idFormaPago = c.Int(),
-                        reservacion_idReservacion = c.Int(),
+                        idReservacion = c.Int(nullable: false),
+                        idFormaPago = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.idVenta)
-                .ForeignKey("dbo.FormaPagoes", t => t.formaPago_idFormaPago)
-                .ForeignKey("dbo.Reservacions", t => t.reservacion_idReservacion)
-                .Index(t => t.formaPago_idFormaPago)
-                .Index(t => t.reservacion_idReservacion);
+                .ForeignKey("dbo.FormaPagoes", t => t.idFormaPago, cascadeDelete: true)
+                .ForeignKey("dbo.Reservacions", t => t.idReservacion, cascadeDelete: true)
+                .Index(t => t.idReservacion)
+                .Index(t => t.idFormaPago);
             
             CreateTable(
                 "dbo.FormaPagoes",
@@ -150,30 +153,42 @@ namespace Autoventas_IN6AV.Migrations
                     })
                 .PrimaryKey(t => t.idFormaPago);
             
+            CreateTable(
+                "dbo.Transmisions",
+                c => new
+                    {
+                        idTransmision = c.Int(nullable: false, identity: true),
+                        nombre = c.String(nullable: false),
+                    })
+                .PrimaryKey(t => t.idTransmision);
+            
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.Ventas", "reservacion_idReservacion", "dbo.Reservacions");
-            DropForeignKey("dbo.Ventas", "formaPago_idFormaPago", "dbo.FormaPagoes");
+            DropForeignKey("dbo.Automovils", "idTransmision", "dbo.Transmisions");
+            DropForeignKey("dbo.Ventas", "idReservacion", "dbo.Reservacions");
+            DropForeignKey("dbo.Ventas", "idFormaPago", "dbo.FormaPagoes");
             DropForeignKey("dbo.Usuarios", "rol_idRol", "dbo.Rols");
-            DropForeignKey("dbo.Reservacions", "usuario_idUsuario", "dbo.Usuarios");
-            DropForeignKey("dbo.Reservacions", "automovil_idAutomovil", "dbo.Automovils");
-            DropForeignKey("dbo.Marcas", "automovil_idAutomovil", "dbo.Automovils");
-            DropForeignKey("dbo.Estadoes", "automovil_idAutomovil", "dbo.Automovils");
-            DropForeignKey("dbo.Combustibles", "automovil_idAutomovil", "dbo.Automovils");
-            DropForeignKey("dbo.Categorias", "automovil_idAutomovil", "dbo.Automovils");
-            DropForeignKey("dbo.Archivoes", "automovil_idAutomovil", "dbo.Automovils");
-            DropIndex("dbo.Ventas", new[] { "reservacion_idReservacion" });
-            DropIndex("dbo.Ventas", new[] { "formaPago_idFormaPago" });
+            DropForeignKey("dbo.Usuarios", "reservacion_idReservacion", "dbo.Reservacions");
+            DropForeignKey("dbo.Automovils", "reservacion_idReservacion", "dbo.Reservacions");
+            DropForeignKey("dbo.Automovils", "idMarca", "dbo.Marcas");
+            DropForeignKey("dbo.Automovils", "idEstado", "dbo.Estadoes");
+            DropForeignKey("dbo.Automovils", "idCombustible", "dbo.Combustibles");
+            DropForeignKey("dbo.Automovils", "idCategoria", "dbo.Categorias");
+            DropForeignKey("dbo.Automovils", "idArchivo", "dbo.Archivoes");
+            DropIndex("dbo.Ventas", new[] { "idFormaPago" });
+            DropIndex("dbo.Ventas", new[] { "idReservacion" });
             DropIndex("dbo.Usuarios", new[] { "rol_idRol" });
-            DropIndex("dbo.Reservacions", new[] { "usuario_idUsuario" });
-            DropIndex("dbo.Reservacions", new[] { "automovil_idAutomovil" });
-            DropIndex("dbo.Marcas", new[] { "automovil_idAutomovil" });
-            DropIndex("dbo.Estadoes", new[] { "automovil_idAutomovil" });
-            DropIndex("dbo.Combustibles", new[] { "automovil_idAutomovil" });
-            DropIndex("dbo.Categorias", new[] { "automovil_idAutomovil" });
-            DropIndex("dbo.Archivoes", new[] { "automovil_idAutomovil" });
+            DropIndex("dbo.Usuarios", new[] { "reservacion_idReservacion" });
+            DropIndex("dbo.Automovils", new[] { "reservacion_idReservacion" });
+            DropIndex("dbo.Automovils", new[] { "idTransmision" });
+            DropIndex("dbo.Automovils", new[] { "idEstado" });
+            DropIndex("dbo.Automovils", new[] { "idCombustible" });
+            DropIndex("dbo.Automovils", new[] { "idCategoria" });
+            DropIndex("dbo.Automovils", new[] { "idMarca" });
+            DropIndex("dbo.Automovils", new[] { "idArchivo" });
+            DropTable("dbo.Transmisions");
             DropTable("dbo.FormaPagoes");
             DropTable("dbo.Ventas");
             DropTable("dbo.Rols");

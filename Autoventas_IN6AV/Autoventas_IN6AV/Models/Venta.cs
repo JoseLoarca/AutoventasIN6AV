@@ -15,7 +15,10 @@ namespace Autoventas_IN6AV.Models
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime fecha { get; set; }
 
+        public int idReservacion { get; set; }
         public virtual Reservacion reservacion { get; set; }
+
+        public int idFormaPago { get; set; }
         public virtual FormaPago formaPago { get; set; }
     }
 }

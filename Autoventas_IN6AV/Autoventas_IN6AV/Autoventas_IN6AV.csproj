@@ -126,14 +126,15 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AutomovilController.cs" />
     <Compile Include="Controllers\CuentaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201603260657459_DB_AUTOVENTAS.cs" />
-    <Compile Include="Migrations\201603260657459_DB_AUTOVENTAS.Designer.cs">
-      <DependentUpon>201603260657459_DB_AUTOVENTAS.cs</DependentUpon>
+    <Compile Include="Migrations\201603312320391_DB_AUTOVENTAS.cs" />
+    <Compile Include="Migrations\201603312320391_DB_AUTOVENTAS.Designer.cs">
+      <DependentUpon>201603312320391_DB_AUTOVENTAS.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Archivo.cs" />
@@ -147,6 +148,7 @@
     <Compile Include="Models\Marca.cs" />
     <Compile Include="Models\Reservacion.cs" />
     <Compile Include="Models\Rol.cs" />
+    <Compile Include="Models\Transmision.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Models\Venta.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -189,6 +191,12 @@
     <Content Include="Views\Home\Index.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Views\Home\Contacto.cshtml" />
+    <Content Include="Views\Automovil\Create.cshtml" />
+    <Content Include="Views\Automovil\Delete.cshtml" />
+    <Content Include="Views\Automovil\Details.cshtml" />
+    <Content Include="Views\Automovil\Edit.cshtml" />
+    <Content Include="Views\Automovil\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -201,8 +209,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201603260657459_DB_AUTOVENTAS.resx">
-      <DependentUpon>201603260657459_DB_AUTOVENTAS.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201603312320391_DB_AUTOVENTAS.resx">
+      <DependentUpon>201603312320391_DB_AUTOVENTAS.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

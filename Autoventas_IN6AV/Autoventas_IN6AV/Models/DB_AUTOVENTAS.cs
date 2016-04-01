@@ -20,5 +20,6 @@ namespace Autoventas_IN6AV.Models
         public virtual DbSet<Rol> rol {get; set;}
         public virtual DbSet<Usuario> usuario {get; set;}
         public virtual DbSet<Venta> venta {get; set;}
+        public virtual DbSet<Transmision> transmision { get; set; }
     }
 }

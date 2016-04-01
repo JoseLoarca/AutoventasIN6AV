@@ -13,6 +13,6 @@ namespace Autoventas_IN6AV.Models
         [Display(Name = "Categoria"), Required(ErrorMessage = "Este tipo de dato es obligatorio.")]
         public String nombre { get; set; }
 
-        public virtual Automovil automovil { get; set; }
+        public virtual List<Automovil> automoviles { get; set; }
     }
 }
