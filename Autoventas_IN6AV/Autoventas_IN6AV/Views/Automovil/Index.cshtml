@@ -1,48 +1,28 @@
 ﻿@model IEnumerable<Autoventas_IN6AV.Models.Automovil>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Automóviles";
 }
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<h2>Automóviles</h2>
+<h3>En esta sección encontrará todos los carros que tenemos disponibles.</h3>
+<h5>Para ver más información, seleccione "Detalles".</h5>
+@if (Session["idUsuario"] != null && (int)Session["idUsuario"] == 10)
+{
+    <p>
+        @Html.ActionLink("Agregar automóvil", "Create")
+    </p>
+    }
 <table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.archivo.nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.categoria.nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.combustible.nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.estado.nombre)
-        </th>
+    <tr>   
         <th>
             @Html.DisplayNameFor(model => model.marca.nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.transmision.nombre)
-        </th>
+        </th>     
         <th>
             @Html.DisplayNameFor(model => model.modelo)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.año)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.color)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.precio)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.informacionExtra)
         </th>
         <th></th>
     </tr>
@@ -50,22 +30,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.archivo.nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.categoria.nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.combustible.nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.estado.nombre)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.marca.nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.transmision.nombre)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.modelo)
@@ -74,18 +39,39 @@
             @Html.DisplayFor(modelItem => item.año)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.color)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.precio)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.informacionExtra)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.idAutomovil }) |
-            @Html.ActionLink("Details", "Details", new { id=item.idAutomovil }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.idAutomovil })
+            @if(Session["idUsuario"]!=null){
+            @Html.ActionLink("Detalles", "Details", new { id = item.idAutomovil })<br />}
+            else
+            {
+               <a href="#register-modal" data-toggle="modal" data-target="#register-modal">Detalles</a>
+               <div id="register-modal" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Error</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>Estás navegando por el sitio como invitado.</p>
+                                <p>Por favor, inicia sesión o registrate para acceder a los detalles de los automóviles.</p>
+                            </div>
+                            <div class="modal-footer">
+                                <a href="@Url.Action("Registro","Cuenta")" class="btn btn-primary" role="button">Registrarme</a>
+                                <a href="@Url.Action("Login","Cuenta")" class="btn btn-primary" role="button">Iniciar Sesión</a>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            }
+            @if (Session["idUsuario"] != null && (int)Session["idUsuario"] == 10)
+            {
+                @Html.ActionLink("Editar", "Edit", new { id=item.idAutomovil }) <br />
+                @Html.ActionLink("Eliminar", "Delete", new { id=item.idAutomovil })
+            }
         </td>
     </tr>
 }
