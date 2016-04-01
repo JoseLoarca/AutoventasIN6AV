@@ -24,6 +24,7 @@ namespace Autoventas_IN6AV.Controllers
             if(usr!=null){
                 Session["nombreUsuario"] = usr.nombre;
                 Session["idUsuario"] = usr.idUsuario;
+                Session["idRol"] = usr.rol;
                 return VerificarSesion();
             }
             else
@@ -46,7 +47,7 @@ namespace Autoventas_IN6AV.Controllers
                 usuario.rol = rol;
                 db.usuario.Add(usuario);
                 db.SaveChanges();
-                ViewBag.mensaje = "El usuario "+ usuario.nombre +" ha sido registrado en el sistema con éxito!";
+                ViewBag.mensaje = "El usuario "+ usuario.nombre +" ha sido registrado en nuestra base de datos!";
             }
             return View();
         }
