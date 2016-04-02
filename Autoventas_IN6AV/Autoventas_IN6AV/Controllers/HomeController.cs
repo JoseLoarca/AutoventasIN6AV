@@ -19,5 +19,9 @@ namespace Autoventas_IN6AV.Controllers
             ViewBag.Info = "Si tiene una consulta, no dude en visitarnos o llamarnos.";
             return View();
         }
+        public ActionResult Taller()
+        {
+            return View();
+        }
 	}
 }

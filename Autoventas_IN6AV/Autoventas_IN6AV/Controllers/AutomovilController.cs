@@ -17,7 +17,7 @@ namespace Autoventas_IN6AV.Controllers
         // GET: Automovil
         public ActionResult Index()
         {
-            var automovil = db.automovil.Include(a => a.archivo).Include(a => a.categoria).Include(a => a.combustible).Include(a => a.estado).Include(a => a.marca).Include(a => a.transmision);
+            var automovil = db.automovil.Include(a => a.categoria).Include(a => a.combustible).Include(a => a.estado).Include(a => a.marca).Include(a => a.transmision);
             return View(automovil.ToList());
         }
 
@@ -62,7 +62,7 @@ namespace Autoventas_IN6AV.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.idArchivo = new SelectList(db.archivo, "idArchivo", "nombre", automovil.idArchivo);
+            
             ViewBag.idCategoria = new SelectList(db.categoria, "idCategoria", "nombre", automovil.idCategoria);
             ViewBag.idCombustible = new SelectList(db.combustible, "idCombustible", "nombre", automovil.idCombustible);
             ViewBag.idEstado = new SelectList(db.estado, "idEstado", "nombre", automovil.idEstado);
@@ -83,7 +83,7 @@ namespace Autoventas_IN6AV.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.idArchivo = new SelectList(db.archivo, "idArchivo", "nombre", automovil.idArchivo);
+            
             ViewBag.idCategoria = new SelectList(db.categoria, "idCategoria", "nombre", automovil.idCategoria);
             ViewBag.idCombustible = new SelectList(db.combustible, "idCombustible", "nombre", automovil.idCombustible);
             ViewBag.idEstado = new SelectList(db.estado, "idEstado", "nombre", automovil.idEstado);
@@ -105,7 +105,7 @@ namespace Autoventas_IN6AV.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.idArchivo = new SelectList(db.archivo, "idArchivo", "nombre", automovil.idArchivo);
+            
             ViewBag.idCategoria = new SelectList(db.categoria, "idCategoria", "nombre", automovil.idCategoria);
             ViewBag.idCombustible = new SelectList(db.combustible, "idCombustible", "nombre", automovil.idCombustible);
             ViewBag.idEstado = new SelectList(db.estado, "idEstado", "nombre", automovil.idEstado);

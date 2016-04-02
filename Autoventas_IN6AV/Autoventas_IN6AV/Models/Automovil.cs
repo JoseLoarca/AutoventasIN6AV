@@ -24,10 +24,6 @@ namespace Autoventas_IN6AV.Models
         [Display(Name = "Extras"), Required(ErrorMessage = "Este dato es obligatorio.")]
         public String informacionExtra { get; set; }
 
-        
-        public int? idArchivo { get; set; }
-        public virtual Archivo archivo { get; set; }
-
         public int idMarca { get; set; }
         public virtual Marca marca { get; set; }
 
@@ -44,6 +40,8 @@ namespace Autoventas_IN6AV.Models
         public virtual Transmision transmision { get; set; }
 
         public virtual Reservacion reservacion { get; set; }
+
+        public virtual List<Archivo> archivos { get; set; }
         
     }
 }

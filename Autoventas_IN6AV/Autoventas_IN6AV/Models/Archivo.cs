@@ -16,6 +16,7 @@ namespace Autoventas_IN6AV.Models
         public FileType tipo { get; set; }
         public Byte[] contenido { get; set; }
 
-        public virtual List<Automovil> automoviles { get; set; }
+        public int idAutomovil { get; set; }
+        public virtual Automovil automovil { get; set; }
     }
 }

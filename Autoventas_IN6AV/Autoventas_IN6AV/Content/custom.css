@@ -1,0 +1,14 @@
+﻿.jumbotron {
+background-image: url("http://i.imgur.com/ll5wJ8M.jpg");
+background-size: cover;
+
+color: white;
+text-shadow: black 0.1em 0.3em 0.3em;
+font-weight: bold;
+font-family: "Arial Black", Gadget, sans-serif;
+}
+mark {
+    background-color: transparent;
+    color: white;
+    text-shadow: black 0.1em 0.3em 0.3em;
+}
