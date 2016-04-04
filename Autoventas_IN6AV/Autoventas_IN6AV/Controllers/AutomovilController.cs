@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Autoventas_IN6AV.Models;
+using System.Data.Entity.Infrastructure;
 
 namespace Autoventas_IN6AV.Controllers
 {
@@ -39,7 +40,6 @@ namespace Autoventas_IN6AV.Controllers
         // GET: Automovil/Create
         public ActionResult Create()
         {
-            ViewBag.idArchivo = new SelectList(db.archivo, "idArchivo", "nombre");
             ViewBag.idCategoria = new SelectList(db.categoria, "idCategoria", "nombre");
             ViewBag.idCombustible = new SelectList(db.combustible, "idCombustible", "nombre");
             ViewBag.idEstado = new SelectList(db.estado, "idEstado", "nombre");
@@ -53,16 +53,26 @@ namespace Autoventas_IN6AV.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idAutomovil,modelo,año,color,precio,informacionExtra,idArchivo,idMarca,idCategoria,idCombustible,idEstado,idTransmision")] Automovil automovil)
+        public ActionResult Create([Bind(Include = "idAutomovil,modelo,año,color,precio,informacionExtra,idMarca,idCategoria,idCombustible,idEstado,idTransmision")] Automovil automovil, HttpPostedFileBase archivo)
         {
             if (ModelState.IsValid)
             {
+                if(archivo!=null && archivo.ContentLength>0){
+                    var imagen = new Archivo{
+                        nombre = System.IO.Path.GetFileName(archivo.FileName),
+                        tipo = FileType.Imagen,
+                        ContentType=archivo.ContentType
+                    };
+                    using(var reader = new System.IO.BinaryReader(archivo.InputStream)){
+                        imagen.contenido= reader.ReadBytes(archivo.ContentLength);
+                    };
+                    automovil.archivos = new List<Archivo> { imagen };
+                }
                 db.automovil.Add(automovil);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            
             ViewBag.idCategoria = new SelectList(db.categoria, "idCategoria", "nombre", automovil.idCategoria);
             ViewBag.idCombustible = new SelectList(db.combustible, "idCombustible", "nombre", automovil.idCombustible);
             ViewBag.idEstado = new SelectList(db.estado, "idEstado", "nombre", automovil.idEstado);
@@ -83,7 +93,6 @@ namespace Autoventas_IN6AV.Controllers
             {
                 return HttpNotFound();
             }
-            
             ViewBag.idCategoria = new SelectList(db.categoria, "idCategoria", "nombre", automovil.idCategoria);
             ViewBag.idCombustible = new SelectList(db.combustible, "idCombustible", "nombre", automovil.idCombustible);
             ViewBag.idEstado = new SelectList(db.estado, "idEstado", "nombre", automovil.idEstado);
@@ -95,17 +104,46 @@ namespace Autoventas_IN6AV.Controllers
         // POST: Automovil/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idAutomovil,modelo,año,color,precio,informacionExtra,idArchivo,idMarca,idCategoria,idCombustible,idEstado,idTransmision")] Automovil automovil)
+        public ActionResult Edit(int? id, HttpPostedFileBase archivo)
         {
-            if (ModelState.IsValid)
-            {
-                db.Entry(automovil).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+            if(id==null){
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            
+            var automovil = db.automovil.Find(id);
+            if(TryUpdateModel(automovil, "", new string[] {"idAutomovil,modelo,año,color,precio,informacionExtra,idArchivo,idMarca,idCategoria,idCombustible,idEstado,idTransmision"})){
+                try
+                {
+                    if(archivo!=null && archivo.ContentLength>0)
+                    {
+                        if(automovil.archivos.Any(i => i.tipo == FileType.Imagen))
+                        {
+                            db.archivo.Remove(automovil.archivos.First(i => i.tipo == FileType.Imagen));
+                        }
+                        var imagen = new Archivo
+                        {
+                            nombre = System.IO.Path.GetFileName(archivo.FileName),
+                            tipo = FileType.Imagen,
+                            ContentType = archivo.ContentType
+                        };
+                        using (var reader = new System.IO.BinaryReader(archivo.InputStream))
+                        {
+                            imagen.contenido = reader.ReadBytes(archivo.ContentLength);
+                        }
+                        automovil.archivos = new List<Archivo> { imagen };
+                    }
+                    db.Entry(automovil).State = EntityState.Modified;
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index");
+                }
+                catch(RetryLimitExceededException /* dex */)
+                {
+                    //Log the error (uncomment dex variable name and add a line here to write a log.)
+                    ModelState.AddModelError("", "Unable to save changes. Try again and if the problem persists, see your system administrator.");
+                }
+            }
             ViewBag.idCategoria = new SelectList(db.categoria, "idCategoria", "nombre", automovil.idCategoria);
             ViewBag.idCombustible = new SelectList(db.combustible, "idCombustible", "nombre", automovil.idCombustible);
             ViewBag.idEstado = new SelectList(db.estado, "idEstado", "nombre", automovil.idEstado);

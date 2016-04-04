@@ -11,6 +11,13 @@
     <hr />
     <dl class="dl-horizontal">
 
+        @if(Model.archivos.Any(i => i.tipo == FileType.Imagen)){
+            <dt>Foto</dt>
+            <dd>
+                <img src="~/Archivo/ObtenerArchivo?id=@Model.archivos.First(i => i.tipo == FileType.Imagen).idArchivo" alt="Foto Automóvil."/>
+            </dd>
+        }
+
         <dt>
             @Html.DisplayNameFor(model => model.categoria.nombre)
         </dt>
@@ -94,7 +101,8 @@
     </dl>
 </div>
 <p>
-    @if(Session["idUsuario"] != null && (int)Session["idUsuario"] == 10) {
+    @if (Session["idUsuario"] != null && (int)Session["idUsuario"] == 10)
+    {
         @Html.ActionLink("Editar", "Edit", new { id = Model.idAutomovil }) }
-   <br/> @Html.ActionLink("Regresar al listado", "Index")
+    <br /> @Html.ActionLink("Regresar al listado", "Index")
 </p>

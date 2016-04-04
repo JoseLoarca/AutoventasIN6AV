@@ -1,16 +1,16 @@
 ﻿@model Autoventas_IN6AV.Models.Automovil
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Editar";
 }
 
-<h2>Edit</h2>
+<h2>Editar Información</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "Automovil", null, FormMethod.Post, new { enctype = "multiform/form-data"}))
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Automovil</h4>
         <hr />
@@ -58,7 +58,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.idMarca, "idMarca", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.idMarca, "Marca", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("idMarca", String.Empty)
                 @Html.ValidationMessageFor(model => model.idMarca)
@@ -66,7 +66,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.idCategoria, "idCategoria", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.idCategoria, "Categoria", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("idCategoria", String.Empty)
                 @Html.ValidationMessageFor(model => model.idCategoria)
@@ -74,7 +74,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.idCombustible, "idCombustible", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.idCombustible, "Combustible", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("idCombustible", String.Empty)
                 @Html.ValidationMessageFor(model => model.idCombustible)
@@ -82,7 +82,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.idEstado, "idEstado", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.idEstado, "Estado", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("idEstado", String.Empty)
                 @Html.ValidationMessageFor(model => model.idEstado)
@@ -90,10 +90,27 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.idTransmision, "idTransmision", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.idTransmision, "Transmisión", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("idTransmision", String.Empty)
                 @Html.ValidationMessageFor(model => model.idTransmision)
+            </div>
+        </div>
+
+        @if (Model.archivos.Any(i => i.tipo == FileType.Imagen))
+        {
+            <div class="form-group">
+                    <span class="control-label col-md-2"><strong>Foto Actual</strong></span>
+                    <div class="col-md-10">
+                        <img src="~/Archivo/ObtenerArchivo?id=@Model.archivos.First(i => i.tipo == FileType.Imagen).idArchivo" alt="Imagen Automóvil."/>
+                    </div>
+            </div>
+        }
+        
+        <div class="form-group">
+            @Html.Label("Foto", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="file" id="foto" name="archivo"/>
             </div>
         </div>
 

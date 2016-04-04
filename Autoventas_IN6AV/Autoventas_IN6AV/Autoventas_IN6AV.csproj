@@ -126,6 +126,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ArchivoController.cs" />
     <Compile Include="Controllers\AutomovilController.cs" />
     <Compile Include="Controllers\CuentaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -193,15 +194,16 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="Views\Home\Contacto.cshtml" />
+    <Content Include="Views\Home\Taller.cshtml" />
     <Content Include="Views\Automovil\Create.cshtml" />
     <Content Include="Views\Automovil\Delete.cshtml" />
     <Content Include="Views\Automovil\Details.cshtml" />
     <Content Include="Views\Automovil\Edit.cshtml" />
     <Content Include="Views\Automovil\Index.cshtml" />
-    <Content Include="Views\Home\Taller.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Archivo\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

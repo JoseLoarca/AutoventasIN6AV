@@ -4,107 +4,117 @@
     ViewBag.Title = "Eliminar";
 }
 
-@if (Session["idUsuario"] != null && (int)Session["idUsuario"] == 10) {
-    
-<h2>Eliminar</h2>
+@if (Session["idUsuario"] != null && (int)Session["idUsuario"] == 10)
+{
 
-<h3>¿Realmente desea eliminar este automóvil de la base de datos?</h3>
-<div>
-    <h4>Automóvil</h4>
-    <hr />
-    <dl class="dl-horizontal">
+    <h2>Eliminar</h2>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.categoria.nombre)
-        </dt>
+    <h3>¿Realmente desea eliminar este automóvil de la base de datos?</h3>
+    <div>
+        <h4>Automóvil</h4>
+        <hr />
+        <dl class="dl-horizontal">
 
-        <dd>
-            @Html.DisplayFor(model => model.categoria.nombre)
-        </dd>
+            @if (Model.archivos.Any(i => i.tipo == FileType.Imagen))
+            {
+                <dt>Foto</dt>
+                <dd>
+                    <img src="~/Archivo/ObtenerArchivo?id=@Model.archivos.First(i => i.tipo == FileType.Imagen).idArchivo" alt="Foto Automóvil." />
+                </dd>
+            }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.combustible.nombre)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.categoria.nombre)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.combustible.nombre)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.categoria.nombre)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.estado.nombre)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.combustible.nombre)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.estado.nombre)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.combustible.nombre)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.marca.nombre)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.estado.nombre)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.marca.nombre)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.estado.nombre)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.transmision.nombre)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.marca.nombre)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.transmision.nombre)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.marca.nombre)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.modelo)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.transmision.nombre)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.modelo)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.transmision.nombre)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.año)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.modelo)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.año)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.modelo)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.color)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.año)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.color)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.año)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.precio)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.color)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.precio)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.color)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.informacionExtra)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.precio)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.informacionExtra)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.precio)
+            </dd>
 
-    </dl>
+            <dt>
+                @Html.DisplayNameFor(model => model.informacionExtra)
+            </dt>
 
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
+            <dd>
+                @Html.DisplayFor(model => model.informacionExtra)
+            </dd>
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Eliminar" class="btn btn-default" /> |
-            @Html.ActionLink("Regresar al listado", "Index")
-        </div>
-    }
-</div>
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Eliminar" class="btn btn-default" /> |
+                @Html.ActionLink("Regresar al listado", "Index")
+            </div>
+        }
+    </div>
 }
 else
 {
