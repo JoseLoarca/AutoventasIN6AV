@@ -7,7 +7,7 @@
 <h2>Editar Información</h2>
 
 
-@using (Html.BeginForm("Edit", "Automovil", null, FormMethod.Post, new { enctype = "multiform/form-data"}))
+@using (Html.BeginForm("Edit", "Automovil", null, FormMethod.Post, new { enctype = "multipart/form-data"}))
 {
     @Html.AntiForgeryToken()
 
@@ -110,7 +110,7 @@
         <div class="form-group">
             @Html.Label("Foto", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <input type="file" id="foto" name="archivo"/>
+                <input type="file" id="Imagen" name="archivo" />
             </div>
         </div>
 

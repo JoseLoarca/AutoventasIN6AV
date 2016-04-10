@@ -24,7 +24,7 @@ namespace Autoventas_IN6AV.Controllers
             if(usr!=null){
                 Session["nombreUsuario"] = usr.nombre;
                 Session["idUsuario"] = usr.idUsuario;
-                Session["idRol"] = usr.rol;
+                Session["rol"] = usr.rol;
                 return VerificarSesion();
             }
             else

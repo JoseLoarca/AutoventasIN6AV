@@ -162,6 +162,11 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Imagenes\atencionalcliente.jpg" />
+    <Content Include="Imagenes\catalogo.jpg" />
+    <Content Include="Imagenes\jumbotron.jpg" />
+    <Content Include="Imagenes\taller.jpg" />
+    <Content Include="Imagenes\taller2.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

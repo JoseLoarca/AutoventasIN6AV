@@ -13,69 +13,59 @@
         @Html.ActionLink("Agregar automóvil", "Create")
     </p>
 }
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.marca.nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.modelo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.año)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
+<div class="row">
+    @foreach (var item in Model) 
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.marca.nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.modelo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.año)
-            </td>
-            <td>
-                @if (Session["idUsuario"] != null)
+        <div class="col-sm-4 col-md-3">
+            <div class="thumbnail">
+                @if (item.archivos.Any(i => i.tipo == FileType.Imagen))
                 {
-                    @Html.ActionLink("Detalles", "Details", new { id = item.idAutomovil })<br />}
-                else
-                {
-                    <a href="#register-modal" data-toggle="modal" data-target="#register-modal">Detalles</a>
-                    <div id="register-modal" class="modal fade" role="dialog">
-                        <div class="modal-dialog">
+                    <img src="~/Archivo/ObtenerArchivo?id=@item.archivos.First(i => i.tipo == FileType.Imagen).idArchivo" alt="Foto Automóvil." />
+                }
+                <div class="caption">
+                    <h3>@Html.DisplayFor(valor => item.modelo)</h3>
+                    <hr />
+                    <p>
+                        <strong>Marca: </strong>@Html.DisplayFor(valor => item.marca.nombre)<br />
+                        <strong>Año de Fabricación: </strong>@Html.DisplayFor(valor => item.año)<br />
+                    </p>
+                    @if (Session["idUsuario"] != null)
+                    {
+                        @Html.ActionLink("Detalles", "Details", new { id = item.idAutomovil })<br />}
+                    else
+                    {
+                        <a href="#register-modal" data-toggle="modal" data-target="#register-modal">Detalles</a>
+                        <div id="register-modal" class="modal fade" role="dialog">
+                            <div class="modal-dialog">
 
-                            <!-- Modal content-->
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title">Error</h4>
+
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Error</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Estás navegando en el sitio como invitado.</p>
+                                        <p>Por favor, inicia sesión o registrate para acceder a los detalles de los automóviles.</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a href="@Url.Action("Registro","Cuenta")" class="btn btn-primary" role="button">Registrarme</a>
+                                        <a href="@Url.Action("Login","Cuenta")" class="btn btn-primary" role="button">Iniciar Sesión</a>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                    </div>
                                 </div>
-                                <div class="modal-body">
-                                    <p>Estás navegando en el sitio como invitado.</p>
-                                    <p>Por favor, inicia sesión o registrate para acceder a los detalles de los automóviles.</p>
-                                </div>
-                                <div class="modal-footer">
-                                    <a href="@Url.Action("Registro","Cuenta")" class="btn btn-primary" role="button">Registrarme</a>
-                                    <a href="@Url.Action("Login","Cuenta")" class="btn btn-primary" role="button">Iniciar Sesión</a>
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                                </div>
+
                             </div>
-
                         </div>
-                    </div>
-                }
-                @if (Session["idUsuario"] != null && (int)Session["idUsuario"] == 10)
-                {
-                    @Html.ActionLink("Editar", "Edit", new { id = item.idAutomovil }) <br />
-                    @Html.ActionLink("Eliminar", "Delete", new { id = item.idAutomovil })
-                }
-            </td>
-        </tr>
+                    }
+                    @if (Session["idUsuario"] != null && (int)Session["idUsuario"] == 10)
+                    {
+                        @Html.ActionLink("Editar", "Edit", new { id = item.idAutomovil }) <br />
+                        @Html.ActionLink("Eliminar", "Delete", new { id = item.idAutomovil })
+                    }
+                </div>
+            </div>
+        </div>
     }
 
-</table>
+</div>
