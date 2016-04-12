@@ -13,7 +13,7 @@ namespace Autoventas_IN6AV.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201604012046299_DB_AUTOVENTAS"; }
+            get { return "201604121331253_DB_AUTOVENTAS"; }
         }
         
         string IMigrationMetadata.Source

@@ -1,5 +1,12 @@
 ﻿@model IEnumerable<Autoventas_IN6AV.Models.Automovil>
 
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>
+
 @{
     ViewBag.Title = "Automóviles";
 }
@@ -7,17 +14,36 @@
 <h2>Automóviles</h2>
 <h3>En esta sección encontrará todos los carros que tenemos disponibles.</h3>
 <h5>Para ver más información, seleccione "Detalles".</h5>
+<hr />
 @if (Session["idUsuario"] != null && (int)Session["idUsuario"] == 10)
 {
     <p>
         @Html.ActionLink("Agregar automóvil", "Create")
     </p>
 }
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" data-toggle="tooltip" data-placement="auto left" title="Realice una búsqueda.">
+                <img alt="Barra de busqueda." src="https://maxcdn.icons8.com/Color/PNG/24/Very_Basic/search-24.png" />
+            </a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+            @using (Html.BeginForm("Index", "Automovil", FormMethod.Get, new { @class = "navbar-form navbar-left", @role = "search" }))
+            {
+                <div class="form-group" id="busqueda">
+                    <input type="text" class="form-control" placeholder="Busque un modelo..." name="search">
+                </div>
+                <button type="submit" class="btn btn-default" id="busqueda">Buscar</button>
+            }
+        </div>
+    </div>
+</nav>
 <div class="row">
     @foreach (var item in Model) 
     {
-        <div class="col-sm-4 col-md-3">
-            <div class="thumbnail">
+        <div class="col-sm-4 col-md-4">
+            <div class="thumbnail third-effect">
                 @if (item.archivos.Any(i => i.tipo == FileType.Imagen))
                 {
                     <img src="~/Archivo/ObtenerArchivo?id=@item.archivos.First(i => i.tipo == FileType.Imagen).idArchivo" alt="Foto Automóvil." />
@@ -28,6 +54,7 @@
                     <p>
                         <strong>Marca: </strong>@Html.DisplayFor(valor => item.marca.nombre)<br />
                         <strong>Año de Fabricación: </strong>@Html.DisplayFor(valor => item.año)<br />
+                        <strong>Precio: </strong>@Html.DisplayFor(valor => item.precio)<br />
                     </p>
                     @if (Session["idUsuario"] != null)
                     {

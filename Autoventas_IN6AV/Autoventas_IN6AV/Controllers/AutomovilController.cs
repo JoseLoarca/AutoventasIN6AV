@@ -16,9 +16,16 @@ namespace Autoventas_IN6AV.Controllers
         private DB_AUTOVENTAS db = new DB_AUTOVENTAS();
 
         // GET: Automovil
-        public ActionResult Index()
+        public ActionResult Index(String search)
         {
             var automovil = db.automovil.Include(a => a.categoria).Include(a => a.combustible).Include(a => a.estado).Include(a => a.marca).Include(a => a.transmision);
+
+            if(!String.IsNullOrEmpty(search))
+            {
+                automovil = automovil.Where(a => a.modelo.Contains(search));
+            
+            }
+
             return View(automovil.ToList());
         }
 

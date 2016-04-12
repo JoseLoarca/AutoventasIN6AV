@@ -15,8 +15,12 @@ namespace Autoventas_IN6AV.Models
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime fecha { get; set; }
 
-        public virtual List<Usuario> usuarios { get; set; }
-        public virtual List<Automovil> automoviles { get; set; }
+        public int idUsuario { get; set; }
+        public virtual Usuario usuario { get; set; }
+
+        public int idAutomovil { get; set; }
+        public virtual Automovil automovil { get; set; }
+
         public virtual List<Venta> ventas { get; set; }
     }
 }

@@ -39,7 +39,7 @@ namespace Autoventas_IN6AV.Models
         public int idTransmision { get; set; }
         public virtual Transmision transmision { get; set; }
 
-        public virtual Reservacion reservacion { get; set; }
+        public virtual List<Reservacion> reservaciones { get; set; }
 
         public virtual List<Archivo> archivos { get; set; }
         
