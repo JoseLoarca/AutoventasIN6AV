@@ -42,6 +42,13 @@ namespace Autoventas_IN6AV.Models
         public virtual List<Reservacion> reservaciones { get; set; }
 
         public virtual List<Archivo> archivos { get; set; }
-        
+
+        public string ModeloCompleto
+        {
+            get
+            {
+                return marca.nombre + " - " + modelo;
+            }
+        }
     }
 }

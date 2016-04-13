@@ -131,12 +131,13 @@
     <Compile Include="Controllers\AutomovilController.cs" />
     <Compile Include="Controllers\CuentaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ReservacionController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201604121331253_DB_AUTOVENTAS.cs" />
-    <Compile Include="Migrations\201604121331253_DB_AUTOVENTAS.Designer.cs">
-      <DependentUpon>201604121331253_DB_AUTOVENTAS.cs</DependentUpon>
+    <Compile Include="Migrations\201604131319516_DB_AUTOVENTAS.cs" />
+    <Compile Include="Migrations\201604131319516_DB_AUTOVENTAS.Designer.cs">
+      <DependentUpon>201604131319516_DB_AUTOVENTAS.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Archivo.cs" />
@@ -207,6 +208,8 @@
     <Content Include="Views\Automovil\Details.cshtml" />
     <Content Include="Views\Automovil\Edit.cshtml" />
     <Content Include="Views\Automovil\Index.cshtml" />
+    <Content Include="Views\Reservacion\Create.cshtml" />
+    <Content Include="Views\Reservacion\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -220,8 +223,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201604121331253_DB_AUTOVENTAS.resx">
-      <DependentUpon>201604121331253_DB_AUTOVENTAS.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201604131319516_DB_AUTOVENTAS.resx">
+      <DependentUpon>201604131319516_DB_AUTOVENTAS.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
