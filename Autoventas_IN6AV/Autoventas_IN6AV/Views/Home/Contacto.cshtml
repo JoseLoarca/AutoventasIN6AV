@@ -1,0 +1,97 @@
+﻿
+@{
+    ViewBag.Title = "Contacto";
+}
+
+<script src="/Scripts/jquery-1.10.2.js"></script>
+
+<script src="/Scripts/bootstrap.js"></script>
+<script src="/Scripts/respond.js"></script> 
+<script>
+    $('#myTabs a').click(function (e) {
+        e.preventDefault()
+        $(this).tab('show')
+    })
+</script>
+
+<h2>Contacto</h2>
+<h3>@ViewBag.Info</h3>
+
+
+<div>
+
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs nav-justified" role="tablist">
+        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Sala de Ventas</a></li>
+        <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Taller</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="home">
+            <div class="container-fluid">
+                <div class="row">
+
+                    <div class="col-lg-3">
+                        <h3>Dirección:</h3>
+                        <address id="oficina" class="oficina content">
+                            6 avenida 13-54<br />
+                            Colonia Landívar, Zona 7<br />
+                            Ciudad de Guatemala, Guatemala<br />
+                        </address>
+
+                        <h3>Horario:</h3>
+                        <address>
+                            Lunes a Viernes: 8am a 5pm<br />
+                            Sábado: 8am a 12pm<br />
+                        </address>
+
+                        <h3>Contacto:</h3>
+                        <address>
+                            <abbr title="Ventas"><strong>C:</strong> </abbr>  <a href="mailto:ventas@cars.com">ventas@cars.com</a><br />
+                            <abbr title="Teléfono"><strong>T:</strong> </abbr>
+                            01800-CARS
+                        </address>
+                    </div>
+                    <div class="col-lg-8 oficina content" id="oficina">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3860.5370004826664!2d-90.53817178569382!3d14.625431389786613!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8589a190308858f1%3A0x6795822b2b81d4ac!2sCentro+Educativo+Tecnico+Laboral+KINAL%2C+6A+Avenida+13-54%2C+Guatemala+01007!5e0!3m2!1ses!2sgt!4v1459479124011" width="840" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="profile">
+            <div role="tabpanel" class="tab-pane active" id="home">
+                <div class="container-fluid">
+                    <div class="row">
+
+                        <div class="col-lg-3">
+                            <h3>Dirección:</h3>
+                            <address id="oficina" class="oficina content">
+                                8va Calle A 33-59<br />
+                                Jardines de Tikal II, Zona 7<br />
+                                Ciudad de Guatemala, Guatemala<br />
+                            </address>
+
+                            <h3>Horario:</h3>
+                            <address>
+                                Lunes a Viernes: 8am a 5pm<br />
+                                Sábado: 8am a 12pm<br />
+                            </address>
+
+                            <h3>Contacto:</h3>
+                            <address>
+                                <abbr title="Taller"><strong>C:</strong> </abbr> <a href="mailto:taller@cars.com">taller@cars.com</a><br />
+                                <abbr title="Teléfono"><strong>T:</strong> </abbr>
+                                01800-CARS
+                            </address>
+                        </div>
+                        <div class="col-lg-8 oficina content" id="oficina">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3860.354938793763!2d-90.55999745766029!3d14.635782295495481!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8589a1c9f71adc09%3A0xc6c012c68ae82c7c!2s8A+Calle%2C+Guatemala!5e0!3m2!1ses!2sgt!4v1459577138729" width="840" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

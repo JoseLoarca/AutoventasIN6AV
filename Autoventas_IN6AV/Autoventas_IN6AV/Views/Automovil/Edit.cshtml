@@ -1,0 +1,131 @@
+﻿@model Autoventas_IN6AV.Models.Automovil
+
+@{
+    ViewBag.Title = "Editar";
+}
+
+<h2>Editar Información</h2>
+
+
+@using (Html.BeginForm("Edit", "Automovil", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Automovil</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.idAutomovil)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.modelo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.modelo)
+                @Html.ValidationMessageFor(model => model.modelo)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.año, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.año)
+                @Html.ValidationMessageFor(model => model.año)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.color, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.color)
+                @Html.ValidationMessageFor(model => model.color)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.precio, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.precio)
+                @Html.ValidationMessageFor(model => model.precio)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.informacionExtra, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.informacionExtra)
+                @Html.ValidationMessageFor(model => model.informacionExtra)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.idMarca, "Marca", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("idMarca", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.idMarca)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.idCategoria, "Categoria", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("idCategoria", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.idCategoria)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.idCombustible, "Combustible", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("idCombustible", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.idCombustible)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.idEstado, "Estado", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("idEstado", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.idEstado)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.idTransmision, "Transmisión", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("idTransmision", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.idTransmision)
+            </div>
+        </div>
+
+        @if (Model.archivos.Any(i => i.tipo == FileType.Imagen))
+        {
+            <div class="form-group">
+                    <span class="control-label col-md-2"><strong>Foto Actual</strong></span>
+                    <div class="col-md-10">
+                        <img src="~/Archivo/ObtenerArchivo?id=@Model.archivos.First(i => i.tipo == FileType.Imagen).idArchivo" alt="Imagen Automóvil."/>
+                    </div>
+            </div>
+        }
+        
+        <div class="form-group">
+            @Html.Label("Foto", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="file" id="archivo" name="archivo" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Guardar" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Regresar al listado", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

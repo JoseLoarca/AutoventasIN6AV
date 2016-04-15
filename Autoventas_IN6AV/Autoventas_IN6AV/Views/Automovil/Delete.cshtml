@@ -1,0 +1,123 @@
+﻿@model Autoventas_IN6AV.Models.Automovil
+
+@{
+    ViewBag.Title = "Eliminar";
+}
+
+@if (Session["idUsuario"] != null && (int)Session["idUsuario"] == 10)
+{
+
+    <h2>Eliminar</h2>
+
+    <h3>¿Realmente desea eliminar este automóvil de la base de datos?</h3>
+    <div>
+        <h4>Automóvil</h4>
+        <hr />
+        <dl class="dl-horizontal">
+
+            @if (Model.archivos.Any(i => i.tipo == FileType.Imagen))
+            {
+                <dt>Foto</dt>
+                <dd>
+                    <img src="~/Archivo/ObtenerArchivo?id=@Model.archivos.First(i => i.tipo == FileType.Imagen).idArchivo" alt="Foto Automóvil." />
+                </dd>
+            }
+
+            <dt>
+                @Html.DisplayNameFor(model => model.categoria.nombre)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.categoria.nombre)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.combustible.nombre)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.combustible.nombre)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.estado.nombre)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.estado.nombre)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.marca.nombre)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.marca.nombre)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.transmision.nombre)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.transmision.nombre)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.modelo)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.modelo)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.año)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.año)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.color)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.color)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.precio)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.precio)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.informacionExtra)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.informacionExtra)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Eliminar" class="btn btn-default" /> |
+                @Html.ActionLink("Regresar al listado", "Index")
+            </div>
+        }
+    </div>
+}
+else
+{
+    <h1 style="text-align:center"><strong>NO AUTORIZADO</strong></h1>
+    <h1 style="text-align:center">Necesita estar logueado como <em>administrador</em> para acceder a este contenido.</h1>
+}

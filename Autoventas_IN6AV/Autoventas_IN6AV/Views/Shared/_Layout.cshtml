@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Autoventas Cars</title>
+    <link rel="icon" href="https://maxcdn.icons8.com/windows8/PNG/26/Travel/car_rental-26.png">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="@Url.Action("Index", "Home")">
+                    <img alt="Autoventas Cars" src="https://maxcdn.icons8.com/Color/PNG/24/Travel/car_rental-24.png">
+                </a>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <strong>@Html.ActionLink("Autoventas Cars", "Index", "Home", null, new { @class = "navbar-brand" })</strong>
+            </div>
+            @if(Session["idUsuario"]!=null){
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Inicio", "Index","Home")</li>
+                        <li>@Html.ActionLink("Contacto","Contacto","Home")</li>
+                        <li>@Html.ActionLink("Catálogo", "Index", "Automovil")</li>
+                        <li>@Html.ActionLink("Taller","Taller","Home")</li>
+                        @if (Session["idUsuario"].Equals(10))
+                        {
+                            <li>@Html.ActionLink("Marcas", "Index", "Marca")</li>
+                            <li role="presentation"><a href="@Url.Action("Index", "Reservacion")">Solicitudes de Reservación <span class="badge">1+</span></a></li>
+                        }
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li role="presentation" class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                @Session["nombreUsuario"] <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="dropdown-header"><em>Opciones</em>
+                                </li>
+                                <li>@Html.ActionLink("Cerrar Sesión","Logout","Cuenta")</li>
+                            </ul>
+                        </li>
+                    </ul>       
+                </div>
+            }
+            else
+            {
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Contacto", "Contacto", "Home")</li>
+                        <li>@Html.ActionLink("Catálogo", "Index", "Automovil")</li>
+                        <li>@Html.ActionLink("Taller", "Taller", "Home")</li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li role="presentation" class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                Invitado <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="dropdown-header"><em>Opciones</em></li>
+                                <li>@Html.ActionLink("Acceder", "Login", "Cuenta")</li>
+                                <li>@Html.ActionLink("Registrarme", "Registro", "Cuenta")</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+                <p>&copy; @DateTime.Now.Year - Autoventas Cars | Website developed by <em>2014224</em></p>
+        </footer>
+    </div>
+
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "Inicio";
+}
+<link rel="stylesheet" type="text/css" href="~/Content/custom.css"/>
+    
+<div class="jumbotron">
+    <h1>Texto invisible</h1>
+    <p class="lead"></p>
+</div>
+
+<div class="row">
+    <div class="col-sm-6 col-md-4">
+        <div class="thumbnail" id="div1">
+            <img src="~/Imagenes/atencionalcliente.jpg" alt="Servicio al clente." />
+            <div class="caption">
+                <h3>Servicio al cliente</h3>
+                <p style="text-align:justify">Visítenos, o envíenos un correo y un representante se contactará con usted.</p>
+                <a href="@Url.Action("Contacto","Home")" class="btn btn-primary center-block" role="button">Contactar</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-md-4">
+        <div class="thumbnail" id="div2">
+            <img src="~/Imagenes/catalogo.jpg" alt="Catálogo autmóviles." />
+            <div class="caption">
+                <h3>Catálogo</h3>
+                <p style="text-align:justify">En nuestro predio virtual podrá ver los diferentes modelos de carros que tenemos a su disposición.</p>
+                <a href="@Url.Action("Index","Automovil")" class="btn btn-default center-block" role="button">Ver</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-md-4">
+        <div class="thumbnail" id="div3">
+           <img src="~/Imagenes/taller.jpg" alt="Taller Autoventas Cars." />
+            <div class="caption">
+                <h3>Taller</h3>
+                <p style="text-align:justify">¿Su carro está fallando? Tráigalo a nuestro taller, donde mecánicos profesionales se encargarán de el.</p>
+                <a href="@Url.Action("Taller","Home")" class="btn btn-primary center-block" role="button">Taller</a>
+            </div>
+        </div>
+    </div>
+</div>

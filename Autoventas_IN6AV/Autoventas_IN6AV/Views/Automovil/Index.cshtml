@@ -1,0 +1,129 @@
+﻿@model IEnumerable<Autoventas_IN6AV.Models.Automovil>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>
+<script>
+    $(document).ready(function () {
+        $('a[href="#showSearch"]').click(function () {
+            $("#marcaSearch").show();
+            $("#featuresSearch").hide();
+            $("#li1").addClass('active');
+            $("#li2").removeClass('active');
+        });
+        $('a[href="#showFeatures"]').click(function () {
+            $("#marcaSearch").hide();
+            $("#featuresSearch").show();
+            $("#li1").removeClass('active');
+            $("#li2").addClass('active');
+        });
+    });
+</script>
+
+@{
+    ViewBag.Title = "Automóviles";
+}
+
+<h2>Automóviles</h2>
+<h3>En esta sección encontrará todos los carros que tenemos disponibles.</h3>
+<h5>Para ver más información, seleccione "Detalles".</h5>
+<hr />
+@if (Session["idUsuario"] != null && (int)Session["idUsuario"] == 10)
+{
+    <p>
+        @Html.ActionLink("Agregar automóvil", "Create")
+    </p>
+}
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" data-toggle="tooltip" data-placement="left" title="Realice una búsqueda.">
+                <img alt="Barra de busqueda." src="https://maxcdn.icons8.com/Color/PNG/24/Very_Basic/search-24.png" />
+            </a>
+        </div>
+        <div class="nav navbar-nav navbar-left">
+            <ul class="nav navbar-nav">
+                <li class="active" id="li1"><a href="#showSearch">Marca o modelo<span class="sr-only">(current)</span></a></li>
+                <li id="li2"><a href="#showFeatures">Características</a></li>
+            </ul>
+        </div>
+        <div id="marcaSearch">
+            @using (Html.BeginForm("Index", "Automovil", FormMethod.Get, new { @class = "navbar-form navbar-left", @role = "search" }))
+            {
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Buscar marca o modelo..." name="search" size="50">
+                </div>
+                <button type="submit" class="btn btn-default" id="busqueda">Buscar</button>
+            }
+        </div>
+        <div id="featuresSearch" hidden >
+            @using (Html.BeginForm("Index", "Automovil", FormMethod.Get, new { @class = "navbar-form navbar-left", @role = "searchFeatures" }))
+            {
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Buscar por características..." name="searchFeatures" size="50">
+                </div>
+                <button type="submit" class="btn btn-default">Buscar</button>
+            }
+        </div>
+    </div>
+</nav>
+<div class="row">
+    @foreach (var item in Model) 
+    {
+        <div class="col-sm-4 col-md-4">
+            <div class="thumbnail third-effect">
+                @if (item.archivos.Any(i => i.tipo == FileType.Imagen))
+                {
+                    <img src="~/Archivo/ObtenerArchivo?id=@item.archivos.First(i => i.tipo == FileType.Imagen).idArchivo" alt="Foto Automóvil." />
+                }
+                <div class="caption">
+                    <h3>@Html.DisplayFor(valor => item.modelo)</h3>
+                    <hr />
+                    <p>
+                        <strong>Marca: </strong>@Html.DisplayFor(valor => item.marca.nombre)<br />
+                        <strong>Año de Fabricación: </strong>@Html.DisplayFor(valor => item.año)<br />
+                        <strong>Precio: </strong>@Html.DisplayFor(valor => item.precio)<br />
+                    </p>
+                    @if (Session["idUsuario"] != null)
+                    {
+                        @Html.ActionLink("Detalles", "Details", new { id = item.idAutomovil })<br />}
+                    else
+                    {
+                        <a href="#register-modal" data-toggle="modal" data-target="#register-modal">Detalles</a>
+                        <div id="register-modal" class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+
+
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Error</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Estás navegando en el sitio como invitado.</p>
+                                        <p>Por favor, inicia sesión o registrate para acceder a los detalles de los automóviles.</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a href="@Url.Action("Registro","Cuenta")" class="btn btn-primary" role="button">Registrarme</a>
+                                        <a href="@Url.Action("Login","Cuenta")" class="btn btn-primary" role="button">Iniciar Sesión</a>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    }
+                    @if (Session["idUsuario"] != null && (int)Session["idUsuario"] == 10)
+                    {
+                        @Html.ActionLink("Editar", "Edit", new { id = item.idAutomovil }) <br />
+                        @Html.ActionLink("Eliminar", "Delete", new { id = item.idAutomovil })
+                    }
+                </div>
+            </div>
+        </div>
+    }
+
+</div>

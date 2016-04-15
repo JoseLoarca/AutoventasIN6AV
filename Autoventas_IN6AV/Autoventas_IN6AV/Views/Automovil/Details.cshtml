@@ -1,0 +1,113 @@
+﻿@model Autoventas_IN6AV.Models.Automovil
+
+@{
+    ViewBag.Title = "Detalles";
+}
+
+
+
+<h2>Detalles</h2>
+
+<div>
+    <h4>Automóvil</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            <strong>@Html.DisplayNameFor(model => model.modelo)</strong>
+        </dt>
+
+        <dd>
+            <strong>@Html.DisplayFor(model => model.modelo)</strong>
+        </dd>
+
+        @if(Model.archivos.Any(i => i.tipo == FileType.Imagen)){
+            <dt>Foto</dt>
+            <dd>
+                <img src="~/Archivo/ObtenerArchivo?id=@Model.archivos.First(i => i.tipo == FileType.Imagen).idArchivo" alt="Foto Automóvil."/>
+            </dd>
+        }
+
+        <dt>
+            @Html.DisplayNameFor(model => model.categoria.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.categoria.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.combustible.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.combustible.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.estado.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.estado.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.marca.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.marca.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.transmision.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.transmision.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.año)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.año)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.color)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.color)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.precio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.precio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.informacionExtra)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.informacionExtra)
+        </dd>
+
+    </dl>
+</div>
+@if(Session["idUsuario"]!=null && (int)Session["idUsuario"]!=10){
+<p>@Html.ActionLink("Reservar", "Create", "Reservacion", new { idAutomovil = Model.idAutomovil}, htmlAttributes: new { @class = "btn btn-primary", @role = "button" })</p>
+   @Html.ActionLink("Imprimir Cotización", "ImpresionCotizacion","Invoice", new { idAutomovil = Model.idAutomovil }, htmlAttributes: new { @class = "btn btn-primary", @role = "button" })}
+<p>
+    @if (Session["idUsuario"] != null && (int)Session["idUsuario"] == 10)
+    {
+        @Html.ActionLink("Editar", "Edit", new { id = Model.idAutomovil }) }
+    <br /> @Html.ActionLink("Regresar al listado", "Index")
+</p>
