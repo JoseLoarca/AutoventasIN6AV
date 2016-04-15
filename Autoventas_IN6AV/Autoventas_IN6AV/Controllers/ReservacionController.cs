@@ -37,10 +37,14 @@ namespace Autoventas_IN6AV.Controllers
         }
 
         // GET: Reservacion/Create
-        public ActionResult Create()
+        public ActionResult Create(int idAutomovil)
         {
+            List<Automovil> automoviles = new List<Automovil>();
+            automoviles.Add(db.automovil.Find(idAutomovil));
             ViewBag.idAutomovil = new SelectList(db.automovil, "idAutomovil", "modelo");
-            ViewBag.idUsuario = new SelectList(db.usuario, "idUsuario", "nombre");
+            List<Usuario> usuarios = new List<Usuario>();
+            usuarios.Add(db.usuario.Find(Session["idUsuario"]));
+            ViewBag.idUsuario = new SelectList(usuarios, "idUsuario", "nombre");
             return View();
         }
 
@@ -55,12 +59,12 @@ namespace Autoventas_IN6AV.Controllers
             {
                 db.reservacion.Add(reservacion);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Reservacion", "Aceptar");
             }
 
             ViewBag.idAutomovil = new SelectList(db.automovil, "idAutomovil", "modelo", reservacion.idAutomovil);
             ViewBag.idUsuario = new SelectList(db.usuario, "idUsuario", "nombre", reservacion.idUsuario);
-            return View(reservacion);
+            return RedirectToAction("Reservacion","Aceptar");
         }
 
         // GET: Reservacion/Edit/5

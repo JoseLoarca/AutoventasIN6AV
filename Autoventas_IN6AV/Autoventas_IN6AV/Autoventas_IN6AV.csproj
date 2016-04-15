@@ -127,6 +127,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AceptarController.cs" />
     <Compile Include="Controllers\ArchivoController.cs" />
     <Compile Include="Controllers\AutomovilController.cs" />
     <Compile Include="Controllers\CuentaController.cs" />
@@ -210,6 +211,8 @@
     <Content Include="Views\Automovil\Index.cshtml" />
     <Content Include="Views\Reservacion\Create.cshtml" />
     <Content Include="Views\Reservacion\Details.cshtml" />
+    <Content Include="Views\Aceptar\Reservacion.cshtml" />
+    <Content Include="Views\Reservacion\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

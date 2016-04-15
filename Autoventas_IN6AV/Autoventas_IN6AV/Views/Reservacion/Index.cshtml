@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Autoventas_IN6AV.Models.Reservacion>
+
+@{
+    ViewBag.Title = "Solicitudes";
+}
+@if(Session["idUsuario"].Equals(10)){
+<h2>Solicitudes</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.automovil.modelo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.usuario.nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fecha)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.automovil.modelo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.usuario.nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fecha)
+        </td>
+    </tr>
+}
+
+</table>
+}
+else
+{
+    <h1 style="text-align:center"><strong>NO AUTORIZADO</strong></h1>
+    <h1 style="text-align:center">Necesita estar logueado como <em>administrador</em> para acceder a este contenido.</h1>
+}

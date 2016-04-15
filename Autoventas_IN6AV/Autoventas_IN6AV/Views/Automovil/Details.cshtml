@@ -1,8 +1,12 @@
 ﻿@model Autoventas_IN6AV.Models.Automovil
 
+
+
 @{
     ViewBag.Title = "Detalles";
 }
+
+
 
 <h2>Detalles</h2>
 
@@ -10,6 +14,14 @@
     <h4>Automóvil</h4>
     <hr />
     <dl class="dl-horizontal">
+
+        <dt>
+            <strong>@Html.DisplayNameFor(model => model.modelo)</strong>
+        </dt>
+
+        <dd>
+            <strong>@Html.DisplayFor(model => model.modelo)</strong>
+        </dd>
 
         @if(Model.archivos.Any(i => i.tipo == FileType.Imagen)){
             <dt>Foto</dt>
@@ -59,14 +71,6 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.modelo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.modelo)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.año)
         </dt>
 
@@ -100,6 +104,8 @@
 
     </dl>
 </div>
+@if(Session["idUsuario"]!=null){
+<p>@Html.ActionLink("Reservar", "Create", "Reservacion", new { idAutomovil = Model.idAutomovil}, htmlAttributes: new { @class = "btn btn-primary", @role = "button" })</p>}
 <p>
     @if (Session["idUsuario"] != null && (int)Session["idUsuario"] == 10)
     {

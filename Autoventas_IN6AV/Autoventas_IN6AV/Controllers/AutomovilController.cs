@@ -101,7 +101,7 @@ namespace Autoventas_IN6AV.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Automovil automovil = db.automovil.Find(id);
+            Automovil automovil = db.automovil.Include(a => a.archivos).SingleOrDefault(a => a.idAutomovil == id);
             if (automovil == null)
             {
                 return HttpNotFound();
@@ -119,19 +119,19 @@ namespace Autoventas_IN6AV.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Automovil automovil, HttpPostedFileBase archivo)
+        public ActionResult Edit(int? id, HttpPostedFileBase archivo)
         {
-            if(automovil==null)
+            if(id==null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            
-            if (TryUpdateModel(automovil, "", new string[] { "idAutomovil, modelo, año, color, precio, informacionExtra, idMarca, idCategoria, idCombustible, idEstado, idTransmision"}))
+            var automovil = db.automovil.Find(id);
+            if (TryUpdateModel(automovil, "", new string[] { "idAutomovil", "modelo", "año", "color", "precio", "informacionExtra", "idMarca", "idCategoria", "idCombustible", "idEstado", "idTransmision"}))
             {
                 try
                 {
-                    if(archivo != null && archivo.ContentLength > 0)
+                    if(archivo!=null && archivo.ContentLength>0)
                     {
                         if(automovil.archivos.Any(i => i.tipo == FileType.Imagen))
                         {

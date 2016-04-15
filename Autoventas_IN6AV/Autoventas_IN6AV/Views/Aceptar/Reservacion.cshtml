@@ -1,0 +1,12 @@
+﻿
+@{
+    ViewBag.Title = "Reservacion";
+}
+
+<h2>Reservación</h2>
+<hr />
+<h5>Hemos recibido con éxito su solicitud.</h5><br />
+<h5> En seguida, un representante de la empresa se pondrá en contacto con usted, @Session["nombreUsuario"], para validar su reservación y darle la información necesaria.</h5>
+
+<a href="@Url.Action("Index","Home")" class="btn btn-primary" role="button">Continuar</a>
+

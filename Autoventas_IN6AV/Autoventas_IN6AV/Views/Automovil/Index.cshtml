@@ -80,9 +80,10 @@
                     <img src="~/Archivo/ObtenerArchivo?id=@item.archivos.First(i => i.tipo == FileType.Imagen).idArchivo" alt="Foto Automóvil." />
                 }
                 <div class="caption">
-                    <h3>@Html.DisplayFor(valor => item.ModeloCompleto)</h3>
+                    <h3>@Html.DisplayFor(valor => item.modelo)</h3>
                     <hr />
                     <p>
+                        <strong>Marca: </strong>@Html.DisplayFor(valor => item.marca.nombre)<br />
                         <strong>Año de Fabricación: </strong>@Html.DisplayFor(valor => item.año)<br />
                         <strong>Precio: </strong>@Html.DisplayFor(valor => item.precio)<br />
                     </p>
