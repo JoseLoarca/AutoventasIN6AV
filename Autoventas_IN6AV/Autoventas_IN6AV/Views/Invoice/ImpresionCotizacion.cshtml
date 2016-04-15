@@ -1,0 +1,107 @@
+﻿@model Autoventas_IN6AV.Models.Automovil
+
+@{
+    Layout = null;
+}
+
+<link href="~/Content/bootstrap.css" rel="stylesheet">
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Cotización - Autoventas Cars</title>
+    <link href="css/bootstrap.css" rel="stylesheet">
+</head>
+<body onload="window.print();">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-6">
+                <h1>
+                    <strong>Autoventas Cars</strong>
+                </h1>
+            </div>
+            <div class="col-xs-6 text-right">
+                <h1>Cotización</h1>
+                <h1><strong>@Html.DisplayFor(model => model.modelo)</strong></h1>
+            </div>
+            <hr>
+            <hr />
+
+
+            <div class="row">
+                <div class="col-xs-10 col-xs-offset-2 text-center">
+                    <div class="span7">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><a href="@Url.Action("Index","Home")">Autoventas Cars</a></h4>
+                            </div>
+                            <div class="panel-body">
+                                <p>
+                                    Dirección: 6 avenida 13-54 Colonia Landívar, Zona 7 Ciudad de Guatemala, Guatemala<br />
+                                    Email: ventas@cars.com <br>
+                                    T: +01800-CARS <br>
+                                    Web: http://github.com/JoseLoarca
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <dl class="dl-horizontal">
+
+                
+                @if (Model.archivos.Any(i => i.tipo == FileType.Imagen))
+                {
+                    <dd>
+                        <img src="~/Archivo/ObtenerArchivo?id=@Model.archivos.First(i => i.tipo == FileType.Imagen).idArchivo" alt="Foto Automóvil." />
+                    </dd>
+                }
+                <dd>
+                   <strong>Marca:</strong> @Html.DisplayFor(model => model.marca.nombre)
+                </dd>
+
+                <dd>
+                    <strong>Modelo: </strong>@Html.DisplayFor(model => model.modelo)
+                </dd>
+
+                <dd>
+                    <strong>Categoría: </strong>@Html.DisplayFor(model => model.categoria.nombre)
+                </dd>
+
+                <dd>
+                    <strong>Combustible: </strong>@Html.DisplayFor(model => model.combustible.nombre)
+                </dd>
+
+                <dd>
+                    <strong>Estado: </strong>@Html.DisplayFor(model => model.estado.nombre)
+                </dd>
+
+
+                <dd>
+                    <strong>Transmisión: </strong>@Html.DisplayFor(model => model.transmision.nombre)
+                </dd>
+
+                <dd>
+                    <strong>Año de Fabricación: </strong>@Html.DisplayFor(model => model.año)
+                </dd>
+
+                <dd>
+                    <strong>Color: </strong> @Html.DisplayFor(model => model.color)
+                </dd>
+
+                <dd>
+                    <strong>Precio: </strong>@Html.DisplayFor(model => model.precio)
+                </dd>
+
+                <dd>
+                    <strong>Extra: </strong>@Html.DisplayFor(model => model.informacionExtra)
+                </dd>
+
+            </dl>
+
+            </div> <!-- / end client details section -->
+        </div>
+
+</body>
+</html>

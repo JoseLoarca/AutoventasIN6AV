@@ -32,6 +32,7 @@
                         <li>@Html.ActionLink("Taller","Taller","Home")</li>
                         @if (Session["idUsuario"].Equals(10))
                         {
+                            <li>@Html.ActionLink("Marcas", "Index", "Marca")</li>
                             <li role="presentation"><a href="@Url.Action("Index", "Reservacion")">Solicitudes de Reservación <span class="badge">1+</span></a></li>
                         }
                     </ul>

@@ -5,7 +5,7 @@
 }
 @if(Session["idUsuario"].Equals(10)){
 <h2>Solicitudes</h2>
-
+<a href="@Url.Action("ImpresionReservacion","Invoice")">Imprimir reporte</a>
 <table class="table">
     <tr>
         <th>

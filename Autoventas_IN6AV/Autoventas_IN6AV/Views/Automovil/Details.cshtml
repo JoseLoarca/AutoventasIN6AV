@@ -1,7 +1,5 @@
 ﻿@model Autoventas_IN6AV.Models.Automovil
 
-
-
 @{
     ViewBag.Title = "Detalles";
 }
@@ -104,8 +102,9 @@
 
     </dl>
 </div>
-@if(Session["idUsuario"]!=null){
-<p>@Html.ActionLink("Reservar", "Create", "Reservacion", new { idAutomovil = Model.idAutomovil}, htmlAttributes: new { @class = "btn btn-primary", @role = "button" })</p>}
+@if(Session["idUsuario"]!=null && (int)Session["idUsuario"]!=10){
+<p>@Html.ActionLink("Reservar", "Create", "Reservacion", new { idAutomovil = Model.idAutomovil}, htmlAttributes: new { @class = "btn btn-primary", @role = "button" })</p>
+   @Html.ActionLink("Imprimir Cotización", "ImpresionCotizacion","Invoice", new { idAutomovil = Model.idAutomovil }, htmlAttributes: new { @class = "btn btn-primary", @role = "button" })}
 <p>
     @if (Session["idUsuario"] != null && (int)Session["idUsuario"] == 10)
     {
